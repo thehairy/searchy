@@ -27,6 +27,6 @@ for (const file of eventyFiles) {
     if (eventyboi.once) {
         client.once(eventyboi.name, (...args) => eventyboi.execute(client, ...args));
     } else {
-        client.once(eventyboi.name, (...args) => eventyboi.execute(client, ...args));
+        client.on(eventyboi.name, (...args) => eventyboi.execute(client, ...args));
     }
 }

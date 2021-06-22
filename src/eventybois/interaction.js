@@ -1,5 +1,6 @@
 module.exports = {
     name: 'interaction',
+    once: false,
     execute: (client, interaction) => {
         console.log('Received an interaction!');
         if (interaction.isCommand()) {

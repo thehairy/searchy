@@ -3,7 +3,7 @@ const { Permissions } = require('discord.js');
 module.exports = {
     name: 'delete',
     execute: async (client, interaction) => {
-        await interaction.deferUpdate({ ephemeral: true });
+        await interaction.defer({ ephemeral: true });
         if (interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
             return interaction.deleteReply();
         } else {
