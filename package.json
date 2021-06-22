@@ -1,0 +1,25 @@
+{
+  "name": "searchy",
+  "version": "0.0.1",
+  "description": "Searchy - Ultimate Search Bot",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thehairy/searchy.git"
+  },
+  "author": "thehairy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thehairy/searchy/issues"
+  },
+  "homepage": "https://github.com/thehairy/searchy#readme",
+  "dependencies": {
+    "discord.js": "^13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3",
+    "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
+    "node-fetch": "^2.6.1"
+  }
+}
