@@ -47,7 +47,6 @@ The NPM command allows to display node packages from NPM.
 The Node command allows for quick queries to the Node.js documentation.
 
 *Example coming soon*
-<br/>
 
 # Contributing
 
