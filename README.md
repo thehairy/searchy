@@ -35,12 +35,12 @@ Command|Description
 
 The MDN command allows for easy access to the JavaScript Mozilla Developer documentation.
 
-![MDN_Example](https://cdn.discordapp.com/attachments/741057475960373259/857255382891626506/unknown.png)
+![MDN_Example](https://cdn.discordapp.com/attachments/741057475960373259/857311447306207313/unknown.png)
 
 ## NPM
 
 The NPM command allows to display node packages from NPM.
-![MDN_Example](https://cdn.discordapp.com/attachments/741057475960373259/857255612727164928/unknown.png)
+![NPM_Example](https://cdn.discordapp.com/attachments/741057475960373259/857311492785569892/unknown.png)
 
 ## Node
 
