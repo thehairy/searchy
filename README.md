@@ -1,4 +1,4 @@
-<h2 align="center">Searchy</h2>
+<h1 align="center">Searchy</h1>
 
 **Searchy** is an open source bot aimed to ease searching the internet within Discord. With functionality and simplicity in mind, our team brings you a feature-rich bot which you can invite to your server by [clicking here](https://discord.com/api/oauth2/authorize?client_id=856995431611367424&permissions=379968&scope=bot%20applications.commands).
 
