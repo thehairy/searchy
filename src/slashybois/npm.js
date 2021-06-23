@@ -49,7 +49,7 @@ module.exports = {
 			.addField('❯ Dependencies', dependencies?.length ? dependencies.join(', ') : 'None')
 			.addField('❯ Maintainers', maintainers.join(', '));
 
-        await interaction.editReply({ embeds: [embed], components: [embedButtons()] });
+        await interaction.editReply({ embeds: [embed] /*, components: [embedButtons()]*/ });
     }
 }
 

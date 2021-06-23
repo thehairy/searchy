@@ -20,6 +20,8 @@
     "discord.js": "^13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3",
     "dotenv": "^10.0.0",
     "moment": "^2.29.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "querystring": "^0.2.1",
+    "turndown": "^7.0.0"
   }
 }
