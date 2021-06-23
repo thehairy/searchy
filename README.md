@@ -54,7 +54,7 @@ We would appreciate any contributions made to Searchy, as every idea from our co
 
 ## Guidelines
 
-We take our standards seriously, and by contributing to this project, you agree to uphold our   guidelines.
+We take our standards seriously, and by contributing to this project, you agree to uphold our guidelines.
 
 - Using welcoming language
 - Focusing on what is important
