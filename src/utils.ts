@@ -20,6 +20,10 @@ export function fetchJSON(url: string) : Promise<any> {
     
 }
 
+export function cleanBreaks(str: string): string {
+    return str.replace(/\n\r/g, '');
+}
+
 export function normalize(num: number): string {
     if (num == undefined || typeof num != 'number') return '';
     return num.toLocaleString(undefined, { minimumIntegerDigits: 2, useGrouping: false });

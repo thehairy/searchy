@@ -24,3 +24,25 @@ interface NPMUser {
     name: string;
     email: string;
 }
+
+interface GoogleItem {
+    title: string;
+    link: string;
+    snippet: string;
+    pagemap: GoogleImage;
+}
+
+interface GoogleImage {
+    cse_thumbnail: Thumbnail[];
+    cse_image: Image[];
+}
+
+interface Image {
+    src: string;
+}
+
+interface Thumbnail {
+    src: string;
+    width: string;
+    height: string;
+}
