@@ -30,13 +30,12 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
         .setAuthor('Google', 'https://img.icons8.com/color/452/google-logo.png', 'https://www.google.com/')
         .setTitle(item.title)
         .setDescription(cleanBreaks(item.snippet))
-        .setFooter(item.link)
         .setURL(item.link)
         .setImage(item.pagemap.cse_thumbnail?.length > 0 ? item.pagemap.cse_thumbnail[0].src : '');
 
     interaction.editReply({ embeds: [embed], components: [[button]] });
 
-    const filter = (i: MessageComponentInteraction) => i.customID === 'delete' && (i?.member as GuildMember).permissions.has(Permissions.FLAGS.MANAGE_MESSAGES);
+    const filter = (i: MessageComponentInteraction) => i.customID === 'delete' && (i.user.id === interaction.user.id || (i.member != null && (i.member as GuildMember).permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)));
     return message.awaitMessageComponentInteraction(filter, { time: 15000 }).then(async () => await interaction.deleteReply()).catch(() => message.edit({ components: [] }));
 }
 
