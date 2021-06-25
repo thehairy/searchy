@@ -1,15 +1,15 @@
-import { Client, Collection } from "discord.js";
-import dotenv from "dotenv";
-import PrettyError from "pretty-error";
-import { LoadEvents } from "./utils.js";
+import { Client, Collection } from 'discord.js';
+import dotenv from 'dotenv';
+import PrettyError from 'pretty-error';
+import { LoadEvents } from './utils.js';
 
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: '../.env' });
 PrettyError.start();
 
 const searchy = new Client({
   intents: 1,
-  shards: "auto",
-  allowedMentions: { parse: ["users", "roles"], repliedUser: true },
+  shards: 'auto',
+  allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
   restRequestTimeout: 25000,
 });
 
@@ -39,7 +39,7 @@ LoadEvents(searchy).then(() => {
   if (process.env.CLIENT_TOKEN) {
     searchy.login(process.env.CLIENT_TOKEN);
   } else {
-    console.log("No client token!");
+    console.log('No client token!');
     process.exit(1);
   }
 });

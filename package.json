@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint src/* --quiet --fix && prettier src/* --write",
+    "lint": "eslint src/**/*.ts --quiet --fix && prettier src/**/*.ts --write",
     "build": "npm i && npm run lint && npx tsc -p ./ && npm run start",
     "start": "node .",
     "prepare": "husky install"
@@ -22,8 +22,8 @@
   "homepage": "https://github.com/thehairy/searchy#readme",
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --fix",
-      "prettier src/* --write"
+      "eslint src/**/*.ts --fix",
+      "prettier src/**/*.ts --write"
     ],
     "*.js": "eslint --cache --fix"
   },

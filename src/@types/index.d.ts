@@ -10,14 +10,14 @@ declare module 'discord.js' {
 
 interface Command {
   data: Discord.ApplicationCommandData;
-  async run(interaction: Discord.CommandInteraction): Promise<unknown>;
+  run(interaction: Discord.CommandInteraction): Promise<unknown>;
 }
 
 interface Event {
   name: string;
   once?: boolean;
-  process?: boolean
-  async run(...args: unknown[]): Promise<void>;
+  process?: boolean;
+  run(...args: unknown[]): Promise<void>;
 }
 
 interface NPMUser {
