@@ -39,6 +39,8 @@ Command|Description
 The Google command allows for quick and seamless web searches, all without ever having to leave Discord.
 ![Google_Example](https://cdn.discordapp.com/attachments/741057475960373259/857770944751206440/unknown.png)
 
+Note: This command is limited to 100 uses daily, so please don't overuse it for now.
+
 ## MDN
 
 The MDN command allows for easy access to the JavaScript Mozilla Developer documentation.
