@@ -43,3 +43,10 @@ LoadEvents(searchy).then(() => {
     process.exit(1);
   }
 });
+
+setTimeout(() => {
+  if (process.env.CI) {
+    console.log('Exiting because CI was detected but cycle was not complete!');
+    process.exit(1);
+  }
+}, 120e3);

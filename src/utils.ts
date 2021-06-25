@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable consistent-return */
 import type { Client, Snowflake } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import recursive from 'recursive-readdir';
 import path from 'path';
 import Md5 from 'md5';
@@ -18,6 +20,16 @@ export function fetchJSON(url: string): Promise<any> {
       reject(e);
     }
   });
+}
+
+export function GenerateSnowflake(): string {
+  let rv = '';
+  const possible = '1234567890';
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < 19; i++)
+    rv += possible.charAt(Math.floor(Math.random() * possible.length));
+  return rv;
 }
 
 export function cleanBreaks(str: string): string {
@@ -139,6 +151,13 @@ export async function LoadCommands(searchy: Client): Promise<void> {
   });
 }
 
+export function delay(inputDelay: number): Promise<void> {
+  // If the input is not a number, instantly resolve
+  if (typeof inputDelay !== 'number') return Promise.resolve();
+  // Otherwise, resolve after the number of milliseconds.
+  return new Promise((resolve) => setTimeout(resolve, inputDelay));
+}
+
 export async function DeployCommands(searchy: Client): Promise<void | boolean> {
   const data = [];
   // eslint-disable-next-line no-restricted-syntax
@@ -189,4 +208,125 @@ export async function DeployCommands(searchy: Client): Promise<void | boolean> {
       ?.commands.set(data);
     return console.log('Application Commands deployed!');
   }
+}
+
+export async function CITest(searchy: Client): Promise<void> {
+  console.log('Starting CI test');
+
+  if (!searchy.options.http) return;
+
+  // eslint-disable-next-line no-param-reassign
+  searchy.options.http.api = 'https://gideonbot.com/api/dump';
+
+  const tests = await import('./tests.js');
+
+  const channel_id = GenerateSnowflake();
+  const guild_id = GenerateSnowflake();
+
+  const user = {
+    id: searchy.owner,
+    username: 'Test',
+    discriminator: '0001',
+    avatar: null,
+    bot: false,
+    system: false,
+    flags: 64,
+  };
+
+  const member = {
+    user,
+    nick: null,
+    roles: [],
+    joined_at: new Date().toISOString(),
+    deaf: false,
+    mute: false,
+  };
+
+  searchy.guilds.add({
+    name: 'Test',
+    region: 'US',
+    member_count: 2,
+    large: false,
+    features: [],
+    embed_enabled: true,
+    premium_tier: 0,
+    verification_level: 1,
+    explicit_content_filter: 1,
+    mfa_level: 0,
+    joined_at: new Date().toISOString(),
+    default_message_notifications: 0,
+    system_channel_flags: 0,
+    id: guild_id,
+    unavailable: false,
+    roles: [
+      {
+        id: guild_id,
+        name: '@everyone',
+        color: 3447003,
+        hoist: true,
+        position: 1,
+        permissions: 66321471,
+        managed: false,
+        mentionable: false,
+      },
+    ],
+    members: [
+      {
+        user: searchy.user?.toJSON(),
+        nick: null,
+        roles: [],
+        joined_at: new Date().toISOString(),
+        deaf: false,
+        mute: false,
+      },
+      member,
+    ],
+    owner_id: user.id,
+  });
+
+  searchy.channels.add({
+    nsfw: false,
+    name: 'test-channel',
+    type: 0,
+    guild_id,
+    id: channel_id,
+  });
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item of tests.commands) {
+    const interaction = new CommandInteraction(searchy, {
+      type: 2,
+      token: 'lol',
+      id: GenerateSnowflake(),
+      channel_id,
+      guild_id,
+      member,
+      data: item,
+    });
+
+    searchy.emit('interaction', interaction);
+  }
+
+  // We need to wait for all requests to go through
+  await delay(5e3);
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    console.log('Checking if all requests are over...');
+    // @ts-expect-error accessing a private property
+    // eslint-disable-next-line no-underscore-dangle
+    if (
+      !searchy.rest.handlers
+        .array()
+        .map((x) => x._inactive)
+        .some((x) => !x)
+    )
+      break;
+    // eslint-disable-next-line no-await-in-loop
+    await delay(2e3);
+  }
+
+  console.log('Run successful, exiting with code 0');
+  searchy.destroy();
+  process.exit();
 }
