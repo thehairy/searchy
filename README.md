@@ -1,4 +1,5 @@
 
+  
 <h1 align="center">Searchy</h1>
 
 **Searchy** is an open source bot aimed to ease searching the internet within Discord. With functionality and simplicity in mind, our team brings you a feature-rich bot which you can invite to your server by [clicking here](https://discord.com/api/oauth2/authorize?client_id=856995431611367424&permissions=379968&scope=bot%20applications.commands).
@@ -7,6 +8,7 @@
 
 - [Commands](#command-list)
 - [Searching](#searching)
+  - [Google](#google)
   - [MDN](#mdn)
   - [NPM](#npm)
   - [Node](#node)
@@ -23,24 +25,30 @@
 Command|Description
 -|-
 **`/ping`**| Displays the latency of the bot
+**`/google`**| Searches Google for a provided query
 **`/mdn`**| Searches the Mozilla Developer documentation
 **`/npm`**| Searches the NPM package registry
 **`/node`**| Searches the Node.js documentation
 
 # Searching
 
-**Searchy has a variety of features such as Mozilla Developer documentation, NPM package registry searches, and Node.js Documentation.** With more commands coming soon, we've added a guide of how to use each command! If you need further support, feel free to join the [support server](https://discord.gg/XbqTeXgz8Z).
+**Searchy has a variety of features such as Google searches, Mozilla Developer Documentation, NPM package registry searches, and Node.js Documentation.** With more commands coming often, we've added a guide of how to use each command! If you need further support, feel free to join the [support server](https://discord.gg/XbqTeXgz8Z).
+
+## Google
+
+The Google command allows for quick and seamless web searches, all without ever having to leave Discord.
+![Google_Example](https://cdn.discordapp.com/attachments/741057475960373259/857770944751206440/unknown.png)
 
 ## MDN
 
 The MDN command allows for easy access to the JavaScript Mozilla Developer documentation.
 
-![MDN_Example](https://cdn.discordapp.com/attachments/741057475960373259/857311447306207313/unknown.png)
+![MDN_Example](https://cdn.discordapp.com/attachments/741057475960373259/857771268178837574/unknown.png)
 
 ## NPM
 
 The NPM command allows to display node packages from NPM.
-![NPM_Example](https://cdn.discordapp.com/attachments/741057475960373259/857311492785569892/unknown.png)
+![NPM_Example](https://cdn.discordapp.com/attachments/741057475960373259/857771110229606450/unknown.png)
 
 ## Node
 
@@ -79,5 +87,3 @@ Issues should be used to report problems with the bot or to request new features
 ### Pull Requests
 
 Pull requests to this project are the main way to integrate fixes and new features into a live production of the bot.
-
-
