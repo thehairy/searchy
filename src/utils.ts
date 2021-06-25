@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable consistent-return */
 import type { Client, Snowflake } from 'discord.js';
@@ -313,12 +314,14 @@ export async function CITest(searchy: Client): Promise<void> {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     console.log('Checking if all requests are over...');
-    // @ts-expect-error accessing a private property
     // eslint-disable-next-line no-underscore-dangle
     if (
+      // @ts-ignore
       !searchy.rest.handlers
         .array()
+        // @ts-ignore
         .map((x) => x._inactive)
+        // @ts-ignore
         .some((x) => !x)
     )
       break;
