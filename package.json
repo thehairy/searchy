@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint src/**/*.ts --quiet --fix && prettier src/**/*.ts --write",
     "build": "npm i && npm run lint && npx tsc -p ./ && npm run start",
-    "start": "node .",
+    "start": "cd dist && node index.js",
     "prepare": "husky install"
   },
   "repository": {

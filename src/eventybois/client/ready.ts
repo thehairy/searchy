@@ -1,29 +1,37 @@
 /* eslint-disable no-param-reassign */
 import { Client, ClientApplication, User, Team } from 'discord.js';
 import LCL from 'last-commit-log';
-import { LoadCommands, DeployCommands } from '../../utils.js';
+import {
+  LoadCommands,
+  DeployCommands,
+  GenerateSnowflake,
+  CITest,
+} from '../../utils.js';
 
 export default {
   name: 'ready',
   once: true,
   async run(searchy: Client): Promise<void> {
-    const app = await searchy.application
-      ?.fetch()
-      .catch((x) => console.log(`Failed to fetch owner: ${x}`));
-    if (
-      app &&
-      app instanceof ClientApplication &&
-      app.owner &&
-      app.owner instanceof User
-    ) {
-      searchy.owner = app.owner.id;
-    } else if (
-      app &&
-      app instanceof ClientApplication &&
-      app.owner &&
-      app.owner instanceof Team
-    ) {
-      searchy.owner = app.owner.ownerID as string;
+    if (process.env.CI) searchy.owner = GenerateSnowflake();
+    else {
+      const app = await searchy.application
+        ?.fetch()
+        .catch((x) => console.log(`Failed to fetch owner: ${x}`));
+      if (
+        app &&
+        app instanceof ClientApplication &&
+        app.owner &&
+        app.owner instanceof User
+      ) {
+        searchy.owner = app.owner.id;
+      } else if (
+        app &&
+        app instanceof ClientApplication &&
+        app.owner &&
+        app.owner instanceof Team
+      ) {
+        searchy.owner = app.owner.ownerID as string;
+      }
     }
 
     await LoadCommands(searchy);
@@ -37,5 +45,6 @@ export default {
       console.log(
         `Logged in as \`${searchy.user?.tag}\`.\n[#${commit.shortHash}](<${commit.gitUrl}/commit/${commit.hash}>) - \`${commit.subject}\` by \`${commit.committer.name}\` on branch [${commit.gitBranch}](<${commit.gitUrl}/tree/${commit.gitBranch}>).`
       );
+    if (process.env.CI) CITest(searchy);
   },
 };
