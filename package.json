@@ -5,8 +5,10 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm i --prefer-offline --no-audit && npx tsc -p ./ && npm run start",
-    "start": "cd dist && node index.js"
+    "lint": "eslint src/**/*.ts --quiet --fix && prettier src/**/*.ts --write",
+    "build": "npm i && npm run lint && npx tsc -p ./ && npm run start",
+    "start": "node .",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -18,11 +20,14 @@
     "url": "https://github.com/thehairy/searchy/issues"
   },
   "homepage": "https://github.com/thehairy/searchy#readme",
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint src/**/*.ts --fix",
+      "prettier src/**/*.ts --write"
+    ],
+    "*.js": "eslint --cache --fix"
+  },
   "dependencies": {
-    "@types/md5": "^2.3.0",
-    "@types/node": "^15.12.4",
-    "@types/node-fetch": "^2.5.10",
-    "@types/recursive-readdir": "^2.2.0",
     "cheerio": "^1.0.0-rc.10",
     "dayjs": "^1.10.5",
     "discord.js": "^13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3",
@@ -32,7 +37,26 @@
     "node-fetch": "^2.6.1",
     "pretty-error": "^3.0.4",
     "recursive-readdir": "^2.2.2",
-    "request": "^2.88.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.0",
+    "@types/node": "^15.12.4",
+    "@types/node-fetch": "^2.5.10",
+    "@types/recursive-readdir": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1",
     "tslib": "^2.3.0",
     "typescript": "^4.3.4"
   }
