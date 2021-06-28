@@ -46,3 +46,10 @@ interface Thumbnail {
   width: string;
   height: string;
 }
+
+interface QuackItem {
+  AbstractText: string;
+  AbstractURL: string;
+  AbstractSource: string;
+  Image: string;
+}

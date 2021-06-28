@@ -29,6 +29,13 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
   const URL = `${API_URL}?key=${API_KEY}&cx=${SEARCH_KEY}&q=${query}`;
 
   const res = await fetchJSON(URL);
+
+  if (!res.items)
+    return interaction.followUp({
+      content: 'No search result found.',
+      ephemeral: true,
+    });
+
   const item: GoogleItem = res.items[0];
 
   const embed = new MessageEmbed()

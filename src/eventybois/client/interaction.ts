@@ -18,10 +18,17 @@ export default {
           ?.run(interaction);
         return cmd;
       } catch (error) {
-        await interaction.reply({
-          content: `There was an error while executing this command!\n\`${error.message}\``,
-          ephemeral: true,
-        });
+        if (interaction.deferred || interaction.replied) {
+          await interaction.followUp({
+            content: `There was an error while executing this command!\n\`${error.message}\``,
+            ephemeral: true,
+          });
+        } else {
+          await interaction.reply({
+            content: `There was an error while executing this command!\n\`${error.message}\``,
+            ephemeral: true,
+          });
+        }
         return console.error(error.stack);
       }
     } else if (interaction.isButton()) {
