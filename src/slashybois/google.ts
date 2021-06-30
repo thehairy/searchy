@@ -48,7 +48,7 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
     .setTitle(item.title)
     .setDescription(cleanBreaks(item.snippet))
     .setURL(item.link)
-    .setImage(
+    .setThumbnail(
       item.pagemap.cse_thumbnail?.length > 0
         ? item.pagemap.cse_thumbnail[0].src
         : ''
