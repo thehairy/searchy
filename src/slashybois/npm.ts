@@ -80,7 +80,7 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
       Permissions.FLAGS.MANAGE_MESSAGES
     );
   return message
-    .awaitMessageComponentInteraction(filter, { time: 15000 })
+    .awaitMessageComponentInteraction({ filter, time: 15000 })
     .then(async () => interaction.deleteReply());
 }
 
