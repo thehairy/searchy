@@ -70,7 +70,7 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
       '❯ Dependencies',
       dependencies?.length ? dependencies.join(', ') : 'None'
     )
-    .addField('❯ Maintainers', maintainers.join(', '));
+    .addField('❯ Maintainers', maintainers.join(', ') || 'No Maintainers');
 
   interaction.editReply({ embeds: [embed], components: [[button]] });
 
@@ -81,7 +81,8 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
     );
   return message
     .awaitMessageComponentInteraction({ filter, time: 15000 })
-    .then(async () => interaction.deleteReply());
+    .then(async () => interaction.deleteReply())
+    .catch(() => message.edit({ components: [] }));
 }
 
 export const data: ApplicationCommandData = {
