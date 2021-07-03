@@ -47,25 +47,21 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
     )
     .setTitle(item.title)
     .setDescription(cleanBreaks(item.snippet))
-    .setURL(item.link)
-    .setThumbnail(
-      item.pagemap.cse_thumbnail?.length > 0
-        ? item.pagemap.cse_thumbnail[0].src
-        : ''
-    );
+    .setURL(item.link);
+  if (item.pagemap.cse_thumbnail[0].src)
+    embed.setThumbnail(item.pagemap.cse_thumbnail[0].src);
 
   interaction.editReply({ embeds: [embed], components: [[button]] });
 
   const filter = (i: MessageComponentInteraction) =>
     i.customID === 'delete' &&
     (i.user.id === interaction.user.id ||
-      (i.member != null &&
-        (i.member as GuildMember).permissions.has(
-          Permissions.FLAGS.MANAGE_MESSAGES
-        )));
+      (i.member as GuildMember)?.permissions?.has(
+        Permissions.FLAGS.MANAGE_MESSAGES
+      ));
   return message
     .awaitMessageComponentInteraction({ filter, time: 15000 })
-    .then(async () => interaction.deleteReply())
+    .then(() => interaction.deleteReply())
     .catch(() => message.edit({ components: [] }));
 }
 

@@ -30,7 +30,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "dayjs": "^1.10.5",
-    "discord.js": "^13.0.0-dev.64f093f.1625051270",
+    "discord.js": "^13.0.0-dev.56b5b7e.1625313788",
     "dotenv": "^10.0.0",
     "last-commit-log": "^3.1.1",
     "md5": "^2.3.0",
