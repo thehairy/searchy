@@ -2,12 +2,50 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable consistent-return */
 import type { Client, Snowflake } from 'discord.js';
-import { CommandInteraction } from 'discord.js';
+import {
+  CommandInteraction,
+  WebhookClient,
+  Util,
+  MessageEmbed,
+} from 'discord.js';
 import recursive from 'recursive-readdir';
 import path from 'path';
 import Md5 from 'md5';
 import fetch from 'node-fetch';
 import type { Command } from './@types/index';
+
+const { log } = console;
+
+// eslint-disable-next-line func-names
+console.log = function (message: any, conly: boolean) {
+  let url = process.env.LOG_WEBHOOK_URL;
+  if (url && !conly) {
+    url = url
+      .replace('https://discordapp.com/api/webhooks/', '')
+      .replace('https://discord.com/api/webhooks/', '');
+    const split = url.split('/');
+    if (split.length < 2) return;
+
+    const client = new WebhookClient(split[0] as Snowflake, split[1]);
+
+    // eslint-disable-next-line no-param-reassign
+    if (message instanceof Error) message = message.stack ?? message.message;
+
+    // eslint-disable-next-line eqeqeq
+    if (typeof message == 'string') {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const msg of Util.splitMessage(message, { maxLength: 1980 })) {
+        client.send({ content: msg, username: 'Searchy-Logs' });
+      }
+    } else client.send({ embeds: [message], username: 'Searchy-Logs' });
+
+    if (!(message instanceof MessageEmbed)) {
+      // eslint-disable-next-line no-param-reassign
+      message = message.replace(/`/g, '').trim();
+    }
+  }
+  return log.apply(console, [message]);
+};
 
 export function fetchJSON(url: string): Promise<any> {
   // eslint-disable-next-line no-async-promise-executor
@@ -91,13 +129,14 @@ export async function LoadEvents(searchy: Client): Promise<void> {
         console.log(
           `${normalize(
             jsfiles.indexOf(filePath) + 1
-          )} - ${filePath} loaded in ${took}ms`
+          )} - ${filePath} loaded in ${took}ms`,
+          true
         );
       }
 
       const end = process.hrtime.bigint();
       const took = (end - start) / BigInt('1000000');
-      console.log(`All events loaded in \`${took}ms\``);
+      console.log(`All events loaded in \`${took}ms\``, true);
       resolve();
     });
   });
@@ -139,13 +178,14 @@ export async function LoadCommands(searchy: Client): Promise<void> {
         console.log(
           `${normalize(
             jsfiles.indexOf(filePath) + 1
-          )} - ${filePath} loaded in ${took}ms`
+          )} - ${filePath} loaded in ${took}ms`,
+          true
         );
       }
 
       const end = process.hrtime.bigint();
       const took = (end - start) / BigInt('1000000');
-      console.log(`All commands loaded in \`${took}ms\``);
+      console.log(`All commands loaded in \`${took}ms\``, true);
 
       resolve();
     });
