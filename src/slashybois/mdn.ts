@@ -27,12 +27,12 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
 
   const filter = (i: MessageComponentInteraction) =>
     i.customID === 'delete' &&
-    (i?.member as GuildMember).permissions.has(
+    (i.member as GuildMember)?.permissions?.has(
       Permissions.FLAGS.MANAGE_MESSAGES
     );
   return message
     .awaitMessageComponentInteraction({ filter, time: 15000 })
-    .then(async () => interaction.deleteReply())
+    .then(() => interaction.deleteReply())
     .catch(() => message.edit({ components: [] }));
 }
 
