@@ -15,7 +15,7 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
 
   const message = (await interaction.fetchReply()) as Message;
   const button = new MessageButton()
-    .setCustomID('delete')
+    .setCustomId('delete')
     .setEmoji('bin:857030444590432286')
     .setStyle('DANGER');
   const { value: query } = interaction.options.get(
@@ -54,13 +54,13 @@ export async function run(interaction: CommandInteraction): Promise<unknown> {
   interaction.editReply({ embeds: [embed], components: [[button]] });
 
   const filter = (i: MessageComponentInteraction) =>
-    i.customID === 'delete' &&
+    i.customId === 'delete' &&
     (i.user.id === interaction.user.id ||
       (i.member as GuildMember)?.permissions?.has(
         Permissions.FLAGS.MANAGE_MESSAGES
       ));
   return message
-    .awaitMessageComponentInteraction({ filter, time: 15000 })
+    .awaitMessageComponent({ filter, time: 15000 })
     .then(() => interaction.deleteReply())
     .catch(() => message.edit({ components: [] }));
 }
