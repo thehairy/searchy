@@ -1,4 +1,4 @@
-import { Client, Collection } from 'discord.js';
+import { Client, Collection, LimitedCollection } from 'discord.js';
 import dotenv from 'dotenv';
 import PrettyError from 'pretty-error';
 import { LoadEvents } from './utils.js';
@@ -7,7 +7,8 @@ dotenv.config({ path: '../.env' });
 PrettyError.start();
 
 const searchy = new Client({
-  intents: 1,
+  makeCache: () => new LimitedCollection(0),
+  intents: 0,
   shards: 'auto',
   allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
   restRequestTimeout: 25000,
