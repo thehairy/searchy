@@ -30,7 +30,7 @@ export default {
         app.owner &&
         app.owner instanceof Team
       ) {
-        searchy.owner = app.owner.ownerID as string;
+        searchy.owner = app.owner.ownerId as string;
       }
     }
 
