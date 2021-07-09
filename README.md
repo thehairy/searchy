@@ -12,6 +12,7 @@
   - [MDN](#mdn)
   - [NPM](#npm)
   - [Node](#node)
+  - [Star Wars](#sw)
 - [Contributing](#contributing)
   - [Guidelines](#guidelines)
   - [Getting Started](#getting-started)
@@ -55,6 +56,12 @@ The NPM command allows to display node packages from NPM.
 ## Node
 
 The Node command allows for quick queries to the Node.js documentation.
+
+*Coming soon*
+
+## Star Wars
+
+The Star Wars command allows for quick queries to the Skyra-Project Star Wars API.
 
 *Coming soon*
 
