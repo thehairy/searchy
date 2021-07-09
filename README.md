@@ -12,7 +12,7 @@
   - [MDN](#mdn)
   - [NPM](#npm)
   - [Node](#node)
-  - [Star Wars](#sw)
+  - [Star Wars](#star-wars)
 - [Contributing](#contributing)
   - [Guidelines](#guidelines)
   - [Getting Started](#getting-started)
